@@ -31,6 +31,7 @@ $block_folders = array(
 	'modal-header',
 	'modal-body',
 	'modal-footer',
+	'tabs',
 	'nav-and-tab',
 	'nav-and-tab-item',
 	'offcanvas',
@@ -51,7 +52,7 @@ $block_folders = array(
 	'content-grid-item',
 	'post-grid',
 	'media-grid',
-	'media-grid-image'
+	'media-grid-image',
 );
 
 foreach ( $block_folders as $block_folder ) {

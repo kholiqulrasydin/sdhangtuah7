@@ -79,6 +79,15 @@ if( typeof jQuery!=='undefined' ) {
 				input.val( font );
 			} );
 
+			$( document ).on( 'change', '.areoi-form-table .areoi-google-font-picker', function(e) {
+				e.preventDefault();
+				var row 			= $( this ).parents( '.areoi-row-input' ),
+					font 			= $( this ).val(),
+					input 			= row.find( '.areoi-input-text' );
+					
+				input.val( font );
+			} );
+
 			function CheckValidColor(color) {
 			    var e = document.getElementById('divValidColor');
 			    if (!e) {
@@ -242,7 +251,7 @@ if( typeof jQuery!=='undefined' ) {
 						multiple: false
 					}).on('select', function() {
 						var attachment = custom_uploader.state().get('selection').first().toJSON();
-						button.html('<img src="' + attachment.url + '" class="areoi-image-w-border">');
+						button.html('<img src="' + attachment.url + '" class="areoi-image-w-border" style="width: 100%; height: auto;">');
 						container.find( 'input' ).val( attachment.url );
 						container.addClass( 'with-image' );
 					}).open();
@@ -253,10 +262,10 @@ if( typeof jQuery!=='undefined' ) {
 				e.preventDefault();
 
 				var button = $(this),
-					container = button.parents( '.areoi-upl-container' );
+					container = button.parents( '.areoi-row-input' );
 
 				container.find( 'input' ).val( '' );
-				container.removeClass( 'with-image' );
+				container.find( '.areoi-upl-container' ).removeClass( 'with-image' );
 			});
 
 			var interval = setInterval( function() {

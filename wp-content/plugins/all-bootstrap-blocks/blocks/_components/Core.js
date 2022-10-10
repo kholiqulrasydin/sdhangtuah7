@@ -13,6 +13,10 @@ import * as helper from './Helpers.js';
 // Custom Components
 import ResponsiveTabPanel from './ResponsiveTabPanel.js';
 import MediaUpload from './MediaUpload.js';
+import ItemMediaUpload from './ItemMediaUpload.js';
+import MediaGallery from './MediaGallery.js';
+import Items from './Items.js';
+import Alignment from './Alignment.js';
 import URLPicker from './URLPicker.js'
 
 // Setting Groups
@@ -52,6 +56,10 @@ export {
     helper,
     ResponsiveTabPanel,
     MediaUpload,
+    ItemMediaUpload,
+    MediaGallery,
+    Items,
+    Alignment,
     URLPicker,
 
     Background,

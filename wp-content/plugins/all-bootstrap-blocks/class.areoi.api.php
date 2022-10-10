@@ -33,6 +33,23 @@ class AREOI_Api
 					}
 				) );
 			}
+
+			register_rest_field( 'search-result', 'url', [
+		        'get_callback' => function ( $post_arr ) {
+		            return $post_arr['url'];
+		        },
+		    ] );
+		    register_rest_field( 'search-result', 'details', [
+		        'get_callback' => function ( $post_arr ) {
+		        	$post = get_post( $post_arr['id'] );
+		        	$image = get_the_post_thumbnail_url( $post->ID );
+		        	
+		            return [
+		            	'excerpt' 	=> $post->post_excerpt,
+		            	'image'		=> $image
+		            ];
+		        },
+		    ] );
 		}
 	}
 

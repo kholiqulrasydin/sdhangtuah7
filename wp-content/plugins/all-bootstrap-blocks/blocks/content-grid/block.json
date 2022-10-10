@@ -25,6 +25,34 @@
 			"type": "string",
 			"default": null
 		},
+
+		"exclude_divider": {
+	        "type": "boolean",
+	        "default": false
+	    },
+	    "exclude_pattern": {
+	        "type": "boolean",
+	        "default": false
+	    },
+	    "change_pattern_color": {
+	        "type": "boolean",
+	        "default": false
+	    },
+	    "pattern_color": {
+			"type": "object",
+			"default": {
+				"hex": "#fff"
+			}
+		},
+	    "exclude_transition": {
+	        "type": "boolean",
+	        "default": false
+	    },
+	    "exclude_parallax": {
+	        "type": "boolean",
+	        "default": false
+	    },
+	    
 		"layout": {
 			"type": "string",
 			"default": "grid"

@@ -1,7 +1,7 @@
 <?php
 /**
  * @package All Bootstrap Blocks
- * @version 1.2.8
+ * @version 1.2.11
  * 
  * Plugin Name:     All Bootstrap Blocks
  * Text Domain:     all-bootstrap-blocks
@@ -9,12 +9,12 @@
  * Description:     Create fully responsive Bootstrap 5 page layouts. 37 free blocks including containers, rows, columns, modals, accordions, cards, buttons and much more.
  * Author:          AREOI
  * Author URI:      https://areoi.io/
- * Version:         1.2.8
+ * Version:         1.2.11
  * License:         GPL v2 or later
  * License URI:     https://www.gnu.org/licenses/gpl-2.0.html
 */
 
-$areoi_version = '1.2.8';
+$areoi_version = '1.2.11';
 
 // Make sure we don't expose any info if called directly
 if ( !function_exists( 'add_action' ) ) {
@@ -28,6 +28,8 @@ define( 'AREOI__NAME', 'AREOI' );
 define( 'AREOI__MINIMUM_WP_VERSION', '5.8' );
 define( 'AREOI__PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 define( 'AREOI__PLUGIN_URI', plugin_dir_url( __FILE__ ) );
+define( 'AREOI__PLUGIN_LIGHTSPEED_DIR', plugin_dir_path( __FILE__ ) . 'lightspeed/' );
+define( 'AREOI__PLUGIN_LIGHTSPEED_URI', plugin_dir_url( __FILE__ ) . 'lightspeed/' );
 define( 'AREOI__BOOTSTRAP_VERSION', '5.0.2' );
 define( 'AREOI__PREPEND', 'areoi' );
 define( 'AREOI__TEXT_DOMAIN', 'all-bootstrap-blocks' );
@@ -43,6 +45,8 @@ require_once( AREOI__PLUGIN_DIR . 'class.areoi.api.php' );
 require_once( AREOI__PLUGIN_DIR . 'class.areoi.activate.php' );
 require_once( AREOI__PLUGIN_DIR . 'class.areoi.export.php' );
 require_once( AREOI__PLUGIN_DIR . 'class.areoi.reset.php' );
+require_once( AREOI__PLUGIN_LIGHTSPEED_DIR . 'classes/class.areoi.plugins.php' );
+require_once( AREOI__PLUGIN_LIGHTSPEED_DIR . 'classes/class.areoi.lightspeed.php' );
 
 // Trigger initialise actions across different classes
 add_action( 'init', array( 'AREOI', 'init' ) );
@@ -50,7 +54,8 @@ add_action( 'init', array( 'AREOI_Blocks', 'init' ) );
 add_action( 'init', array( 'AREOI_Settings', 'init' ) );    
 add_action( 'init', array( 'AREOI_Styles', 'init' ) ); 
 add_action( 'init', array( 'AREOI_Export', 'init' ) );   
-add_action( 'init', array( 'AREOI_Reset', 'init' ) );    
+add_action( 'init', array( 'AREOI_Reset', 'init' ) );   
+add_action( 'init', array( 'AREOI_Plugins', 'init' ) );    
 add_action( 'rest_api_init', array( 'AREOI_Api', 'init' ) );
 register_activation_hook( __FILE__, array( 'AREOI_Activate', 'init' ) );
 

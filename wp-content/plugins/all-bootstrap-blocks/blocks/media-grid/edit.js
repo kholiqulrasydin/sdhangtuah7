@@ -754,8 +754,9 @@ function GalleryEdit( props ) {
             { !attributes.preview &&
             	<div { ...blockProps }>
 					<InspectorControls>
+						
 						<areoi.components.PanelBody title={ 'Settings' } initialOpen={ false }>
-                            
+
                             <SelectControl className="areoi-panel-row"
 								label={ __( 'Link to' ) }
 								value={ linkTo }

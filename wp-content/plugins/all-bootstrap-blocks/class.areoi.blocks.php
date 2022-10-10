@@ -26,27 +26,33 @@ class AREOI_Blocks
 	public static function add_block_categories( $categories, $post ) 
 	{
 		$new_category = [
+			'slug' => 'areoi-headers-and-footers',
+			'title' => __( 'Bootstrap Headers and Footers (Beta)', AREOI__TEXT_DOMAIN ),
+			'icon'	=> ''
+		];
+		$new_categories[] = $new_category;
+
+		$new_category = [
 			'slug' => 'areoi-layout',
-			'title' => __( 'Bootstrap Layout', 'areoi-layout' ),
+			'title' => __( 'Bootstrap Layout', AREOI__TEXT_DOMAIN ),
 			'icon'	=> ''
 		];
 		$new_categories[] = $new_category;
 
 		$new_category = [
 			'slug' => 'areoi-components',
-			'title' => __( 'Bootstrap Components', 'areoi-components' ),
+			'title' => __( 'Bootstrap Components', AREOI__TEXT_DOMAIN ),
 			'icon'	=> ''
 		];
 		$new_categories[] = $new_category;
 
 		$new_category = [
 			'slug' => 'areoi-strips',
-			'title' => __( 'Bootstrap Strips (Beta)', 'areoi-strips' ),
+			'title' => __( 'Bootstrap Strips (Beta)', AREOI__TEXT_DOMAIN ),
 			'icon'	=> ''
 		];
-		$new_categories[] = $new_category;
+		$strips = array( $new_category );
 		
-		// Merge original categories with newly added from framework
-		return array_merge( $new_categories, $categories);
+		return array_merge( $new_categories, $categories, $strips );
 	}
 }

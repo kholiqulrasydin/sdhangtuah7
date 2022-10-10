@@ -14,7 +14,14 @@
   }
 }
 
-.form-check-input {
+.areoi-override-nf .nf-field-element .form-check-input,
+.areoi-override-nf .field-wrap>div .form-check-input {
+  width: $form-check-input-width !important;
+}
+
+.form-check-input,
+.areoi-override-nf .nf-field-element .form-check-input,
+.areoi-override-nf .field-wrap>div .form-check-input {
   width: $form-check-input-width;
   height: $form-check-input-width;
   margin-top: ($line-height-base - $form-check-input-width) * .5; // line-height minus check height

@@ -16,6 +16,10 @@
 			"type": "boolean",
 			"default": false
 		},
+		"align": {
+			"type": "string",
+			"default": "full"
+		},
 		"anchor": {
 			"type": "string",
 			"default": false
@@ -28,6 +32,34 @@
 			"type": "string",
 			"default": null
 		},
+
+		"exclude_divider": {
+	        "type": "boolean",
+	        "default": false
+	    },
+	    "exclude_pattern": {
+	        "type": "boolean",
+	        "default": false
+	    },
+	    "change_pattern_color": {
+	        "type": "boolean",
+	        "default": false
+	    },
+	    "pattern_color": {
+			"type": "object",
+			"default": {
+				"hex": "#fff"
+			}
+		},
+	    "exclude_transition": {
+	        "type": "boolean",
+	        "default": false
+	    },
+	    "exclude_parallax": {
+	        "type": "boolean",
+	        "default": false
+	    },
+	    
 		"utilities_bg": {
 			"type": "string",
 			"default": null
@@ -40,6 +72,7 @@
 			"type": "string",
 			"default": null
 		},
+
 		"background_display": {
 			"type": "boolean",
 			"default": false
@@ -403,7 +436,7 @@
 	},
 	"supports": {
 		"anchor": true,
-		"align": true,
+		"align": false,
 		"html": false
 	},
 	"editorScript": "areoi-blocks",

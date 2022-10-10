@@ -4,6 +4,7 @@ function areoi_render_block_button( $attributes, $content )
 	$class 			= 	trim( 
 		areoi_get_class_name_str( array( 
 			'btn',
+			'areoi-has-url',
 			'position-relative',
 			( !empty( $attributes['className'] ) ? $attributes['className'] : '' ),
 			( !empty( $attributes['style'] ) ? $attributes['style'] : '' ),

@@ -21,7 +21,7 @@ function areoi_render_block_banner( $attributes, $content )
 			$has_follows,
 			( !empty( $attributes['size'] ) ? $attributes['size'] : '' ),
 			( !empty( $attributes['align'] ) ? 'align' . $attributes['align'] : '' ),
-			( !empty( $attributes['className'] ) ? $attributes['className'] : '' )
+			( !empty( $attributes['className'] ) ? $attributes['className'] : '' ),
 		) ) 
 		. ' ' . 
 		areoi_get_display_class_str( $attributes, 'block' ) 

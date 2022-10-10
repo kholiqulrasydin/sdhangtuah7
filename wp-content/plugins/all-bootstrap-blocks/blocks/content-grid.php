@@ -1,6 +1,8 @@
 <?php
 function areoi_render_block_content_grid( $attributes, $content ) 
 {
+	$allow_pattern = true;
+	
 	if ( !$content ) return $content;
 
 	$layout 		= !empty( $attributes['layout'] ) ? $attributes['layout'] : 'gird';
@@ -30,7 +32,7 @@ function areoi_render_block_content_grid( $attributes, $content )
 			( empty( $attributes['hide_xxl'] ) && !empty( $attributes['horizontal_align_xxl'] ) ? $attributes['horizontal_align_xxl'] : '' ),
 
 			( !empty( $attributes['align'] ) ? 'align' . $attributes['align'] : '' ),
-			( !empty( $attributes['className'] ) ? $attributes['className'] : '' )
+			( !empty( $attributes['className'] ) ? $attributes['className'] : '' ),
 		) ) 
 		. ' ' . 
 		areoi_get_display_class_str( $attributes, 'block' ) 

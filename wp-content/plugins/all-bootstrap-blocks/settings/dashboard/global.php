@@ -21,6 +21,17 @@ return array(
 		'options' => array()
 	),
 	array(
+		'label' => 'Include Bootstrap Icon CSS',
+		'name' => $slug . 'bootstrap-icon-css',
+		'variable' => '',
+		'row' => 'default',
+		'input' => 'checkbox',
+		'default' => false,
+		'description' => 'If checked, then Bootstrap Icons CSS will automatically be inserted into the head of your website.',
+		'allow_reset' => false,
+		'options' => array()
+	),
+	array(
 		'label' => 'Bootstrap CSS Priority',
 		'name' => $slug . 'bootstrap-css-priority',
 		'variable' => '',

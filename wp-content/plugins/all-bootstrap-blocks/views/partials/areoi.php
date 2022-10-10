@@ -1,4 +1,6 @@
+<?php if ( !areoi_is_lightspeed() ) : ?>
 <div class="areoi-body">
+   
    <div class="areoi-card active areoi-card-branded">
 
       <div class="areoi-card-body" style="width: 60%">
@@ -18,6 +20,7 @@
          <?php include( AREOI__PLUGIN_DIR . 'views/partials/mailchimp.php' ); ?>
       </div><!-- .areoi-card-body -->
    </div><!-- .areoi-card -->
+
    
    <div class="areoi-card active areoi-card-branded" style="background: #7952b3;">
       
@@ -40,3 +43,4 @@
    </div><!-- .areoi-card -->
    
 </div><!-- .areoi-body -->
+<?php endif; ?>

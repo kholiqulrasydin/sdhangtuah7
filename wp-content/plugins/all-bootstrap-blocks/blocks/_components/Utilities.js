@@ -18,6 +18,7 @@ const Utilities = ( areoi, attributes, onChange ) => {
                         { label: 'Info', value: 'bg-info' },
                         { label: 'Light', value: 'bg-light' },
                         { label: 'Dark', value: 'bg-dark' },
+                        { label: 'Body', value: 'bg-body' },
                     ] }
                     onChange={ ( value ) => onChange( 'utilities_bg', value ) }
                 />

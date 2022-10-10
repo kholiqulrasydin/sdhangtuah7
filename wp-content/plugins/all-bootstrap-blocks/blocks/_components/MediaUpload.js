@@ -9,15 +9,15 @@ const MediaUpload = ( areoi, attributes, onChange, label, type, key ) => {
                     label="Image"
                     allowedTypes={ [type] }
                     onSelect={ ( val ) => onChange( key, val ) }
-                    value={ attributes[key] ? attributes[key].id : null }
+                    value={ attributes[key] != undefined && attributes[key] ? attributes[key].id : null }
                     render={({ open}) => (
                         <areoi.components.Button 
                             className={ 'editor-post-featured-image__toggle areoi-components-button-img' }
                             onClick={ open }
                         >
-                            { !attributes[key] && areoi.__('Choose ' + label, 'awp') }
+                            { (!attributes[key] || !attributes[key].id) && areoi.__('Choose ' + label, 'awp') }
 
-                            { type == 'image' && attributes[key] != undefined && 
+                            { type == 'image' && attributes[key] != undefined && attributes[key].id && 
                                 <areoi.components.ResponsiveWrapper
                                     naturalWidth={ attributes[key].width }
                                     naturalHeight={ attributes[key].height }
@@ -26,7 +26,7 @@ const MediaUpload = ( areoi, attributes, onChange, label, type, key ) => {
                                 </areoi.components.ResponsiveWrapper>
                             }
 
-                            { type == 'video' && attributes[key] != undefined && 
+                            { type == 'video' && attributes[key] != undefined && attributes[key].id && 
                                 <video>
                                     <source src={ attributes[key].url } />
                                 </video>
@@ -37,9 +37,9 @@ const MediaUpload = ( areoi, attributes, onChange, label, type, key ) => {
                 />
             </areoi.editor.MediaUploadCheck>
 
-            {attributes[key] && 
+            { attributes[key] != undefined && attributes[key] && attributes[key].id && 
                 <areoi.editor.MediaUploadCheck>
-                    <areoi.components.Button onClick={ ( image ) => onChange( key, null ) } isLink isDestructive>
+                    <areoi.components.Button onClick={ ( image ) => onChange( key, {} ) } isLink isDestructive>
                         {areoi.__('Remove ' + label, 'awp')}
                     </areoi.components.Button>
                 </areoi.editor.MediaUploadCheck>

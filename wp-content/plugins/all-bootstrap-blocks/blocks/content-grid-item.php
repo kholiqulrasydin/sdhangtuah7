@@ -64,6 +64,10 @@ function areoi_render_block_content_grid_item( $attributes, $content )
 	$width = !empty( $attributes['media_fit'] ) && $attributes['media_fit'] == 'set' ? ( !empty( $attributes['media_width'] ) ? $attributes['media_width'] : '100' ) : false;
 
 	$media = '';
+	$image_url = !empty( $attributes['image']['url'] ) ? $attributes['image']['url'] : '';
+	$image_alt = !empty( $attributes['image']['alt'] ) ? $attributes['image']['alt'] : '';
+	$image_width = !empty( $attributes['image']['width'] ) ? $attributes['image']['width'] : '';
+	$image_height = !empty( $attributes['image']['height'] ) ? $attributes['image']['height'] : '';
 
 	if ( ( !empty( $attributes['image'] ) || !empty( $attributes['video'] ) ) ) {
 		
@@ -71,7 +75,7 @@ function areoi_render_block_content_grid_item( $attributes, $content )
 			$media .= '<div class="areoi-media-container ' . $fit . ' ' . $align . '">';
 
 				if ( !empty( $attributes['image'] ) ) {
-					$media .= '<img src="' . $attributes['image']['url'] . '" width="' . $attributes['image']['width'] . '" height="' . $attributes['image']['height'] . '" alt="' . $attributes['image']['alt'] . '" style="' . ( $height ? 'max-height: ' . $height . 'px;' : '') . ( $width ? 'max-width: ' . $width . 'px;' : '') . '" />';
+					$media .= '<img src="' . $image_url . '" width="' . $image_width . '" height="' . $image_height . '" alt="' . $image_alt . '" style="' . ( $height ? 'max-height: ' . $height . 'px;' : '') . ( $width ? 'max-width: ' . $width . 'px;' : '') . '" />';
 				}
 
                 if ( !empty( $attributes['video'] ) ) {
@@ -89,7 +93,7 @@ function areoi_render_block_content_grid_item( $attributes, $content )
 			$output = '
 				<div ' . areoi_return_id( $attributes ) . ' class="' . areoi_format_block_id( $attributes['block_id'] ) . ' ' . $class . ' p-0">
 
-					<div class="d-flex flex-column h-100 overflow-hidden position-relative">
+					<div class="d-flex flex-column h-100 overflow-hidden position-relative ' . ( !empty( $attributes['url'] ) ? 'areoi-has-url' : '' ) . '">
 						' . $background . '
 
 						' . $media . '
@@ -111,7 +115,7 @@ function areoi_render_block_content_grid_item( $attributes, $content )
 			$output = '
 				<div ' . areoi_return_id( $attributes ) . ' class="' . areoi_format_block_id( $attributes['block_id'] ) . ' ' . $class . '">
 
-					<div class="d-flex flex-column h-100 overflow-hidden position-relative">
+					<div class="d-flex flex-column h-100 overflow-hidden position-relative ' . ( !empty( $attributes['url'] ) ? 'areoi-has-url' : '' ) . '">
 						' . $background . '
 						
 						<div class="card-body pb-0">' . $media . '</div>
@@ -134,7 +138,7 @@ function areoi_render_block_content_grid_item( $attributes, $content )
 			$output = '
 				<div ' . areoi_return_id( $attributes ) . ' class="' . areoi_format_block_id( $attributes['block_id'] ) . ' ' . $class . '">
 
-					<div class="card h-100 overflow-hidden position-relative">
+					<div class="card h-100 overflow-hidden position-relative ' . ( !empty( $attributes['url'] ) ? 'areoi-has-url' : '' ) . '">
 						' . $background . '
 
 						' . $media . '

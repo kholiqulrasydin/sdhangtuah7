@@ -108,7 +108,7 @@ areoi.blocks.registerBlockType( meta, {
                 { !attributes.preview &&
                     <div { ...blockProps }>
                         <areoi.editor.InspectorControls key="setting">
-
+                            
                             <areoi.components.PanelBody title={ 'Settings' } initialOpen={ false }>
 
                                 <areoi.components.PanelRow>

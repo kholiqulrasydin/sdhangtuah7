@@ -54,6 +54,14 @@
 	top: 0;
 	left: 0;
 }
+.areoi-element .areoi-element {
+	.areoi-background-pattern {
+		display: none;
+	}
+	.areoi-divider {
+		mask: none;
+	}
+}
 .alert,
 .list-group-item {
 	.icon {

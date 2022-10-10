@@ -4,7 +4,7 @@ Tags: Bootstrap, Bootstrap Blocks, Bootstrap 5, Gutenberg, Gutenberg Blocks, Blo
 Requires at least: 5
 Tested up to: 6.0
 Requires PHP: 7
-Stable tag: 1.2.8
+Stable tag: 1.2.11
 License: GPL v2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -119,6 +119,18 @@ Bootstrap is included. However you have the ability to switch this off in your W
 [Please add any feature requests or bugs within the support section.](https://wordpress.org/support/plugin/all-bootstrap-blocks/)
 
 == Changelog ==
+
+= 1.2.11 =
+* UPDATE: Added blocks to be used with Lightspeed theme
+
+= 1.2.10 =
+* FIX: When trying to add a background block errors
+
+= 1.2.9 =
+* FEATURE: Enabled Bootstrap imports to be excluded from compiled CSS
+* FEATURE: Added custom alignment controls to allow Wide and Full width to be selected in child blocks
+* FEATURE: Added tabs block to anable tabbed content
+* FIX: Bootstrap settings revert on dectivate / reactivate
 
 = 1.2.8 =
 * FIX: Make Strip block full width aligned as default

@@ -1,4 +1,4 @@
-<?php  
+<?php 
 $background_row_class 	= areoi_get_class_name_str( array(
 	( !empty( $attributes['background_horizontal_align'] ) ? $attributes['background_horizontal_align'] : '' )
 ));
@@ -11,14 +11,20 @@ $background_col_class 	= 	areoi_get_class_name_str( array(
 	( !empty( $attributes['background_col_xl'] ) ? $attributes['background_col_xl'] : '' ),
 	( !empty( $attributes['background_col_xxl'] ) ? $attributes['background_col_xxl'] : '' )
 ));
+
+$background_utility = !empty( $attributes['background_utility'] ) ? $attributes['background_utility'] : '';
+
+$background = '';
+
+$background_pattern = include( AREOI__PLUGIN_DIR . 'blocks/_partials/patterns.php' );
+
 if ( !empty( $attributes['background_display'] ) ) {
-	
-	return '
-		<div class="areoi-background">
+	$background = '
+		<div class="areoi-background ' . $background_utility . '">
 			<div class="container-fluid" style="padding: 0;">
 				<div class="row ' . $background_row_class . '">
 					<div class="col ' . $background_col_class . '">
-			            ' . ( !empty( $attributes['background_color'] ) ? 
+			            ' . ( !empty( $attributes['background_color'] ) && !$background_utility ? 
 	                        '<div class="' . areoi_get_class_name_str( array( 
 		                            'areoi-background__color'
 		                        ) ) . '" 
@@ -50,6 +56,6 @@ if ( !empty( $attributes['background_display'] ) ) {
 	    	</div>
 	    </div>
 	';
-} else {
-	return '';
 }
+
+return $background . $background_pattern;

@@ -27,6 +27,7 @@ areoi.blocks.registerBlockType( meta, {
 
         const classes = [
             attributes.container,
+            'align' + attributes.align,
             attributes.utilities_bg,
             attributes.utilities_text,
             attributes.utilities_border,
@@ -57,6 +58,11 @@ areoi.blocks.registerBlockType( meta, {
                 {
                     !attributes.preview &&
                     <div { ...blockProps }>
+
+                        <areoi.editor.BlockControls>
+                            { areoi.Alignment( areoi, attributes, onChange ) }
+                        </areoi.editor.BlockControls>
+
                         <areoi.editor.InspectorControls key="setting">
 
                             <areoi.components.PanelBody title={ 'Settings' } initialOpen={ false }>

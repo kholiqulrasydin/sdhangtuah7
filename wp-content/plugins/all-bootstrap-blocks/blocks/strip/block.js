@@ -36,6 +36,7 @@ areoi.blocks.registerBlockType( meta, {
 
         const classes = [
             'strip',
+            'align' + attributes.align,
             attributes.utilities_bg,
             attributes.utilities_text,
             attributes.utilities_border,
@@ -66,8 +67,90 @@ areoi.blocks.registerBlockType( meta, {
 
                 { !attributes.preview &&
                     <div { ...blockProps }>
+                        <areoi.editor.BlockControls>
+                            { areoi.Alignment( areoi, attributes, onChange ) }
+                        </areoi.editor.BlockControls>
                         <areoi.editor.InspectorControls key="setting">
 
+                            {
+                                ( areoi_lightspeed_vars.pattern || areoi_lightspeed_vars.divider || areoi_lightspeed_vars.transition || areoi_lightspeed_vars.parallax ) && 
+                                <areoi.components.PanelBody title={ 'Lightspeed' } initialOpen={ false }>
+                                    {
+                                        areoi_lightspeed_vars.divider &&
+                                        
+                                        <areoi.components.PanelRow className={ 'areoi-panel-row areoi-panel-row-no-border' }>
+                                            <areoi.components.ToggleControl 
+                                                label={ 'Exclude divider' }
+                                                help="If checked this block will not display a divider."
+                                                checked={ attributes.exclude_divider }
+                                                onChange={ ( value ) => onChange( 'exclude_divider', value ) }
+                                            />
+                                        </areoi.components.PanelRow>
+                                    }
+
+                                    {
+                                        areoi_lightspeed_vars.pattern &&
+                                        <>
+                                            <areoi.components.PanelRow className={ 'areoi-panel-row areoi-panel-row-no-border' }>
+                                                <areoi.components.ToggleControl 
+                                                    label={ 'Exclude pattern' }
+                                                    help="If checked this block will not display a pattern."
+                                                    checked={ attributes.exclude_pattern }
+                                                    onChange={ ( value ) => onChange( 'exclude_pattern', value ) }
+                                                />
+                                            </areoi.components.PanelRow>
+
+                                            {
+                                                !attributes.exclude_pattern &&
+                                                <>
+                                                    <areoi.components.PanelRow className={ 'areoi-panel-row areoi-panel-row-no-border' }>
+                                                        <areoi.components.ToggleControl 
+                                                            label={ 'Change pattern color' }
+                                                            help="If checked the pattern will display in the selected color."
+                                                            checked={ attributes.change_pattern_color }
+                                                            onChange={ ( value ) => onChange( 'change_pattern_color', value ) }
+                                                        />
+                                                    </areoi.components.PanelRow>
+
+                                                    {
+                                                        attributes.change_pattern_color &&
+                                                        <>
+                                                        { areoi.ColorPicker( areoi, attributes, onChange, 'pattern_color', 'Pattern Color' ) }
+                                                        </>
+                                                    }
+                                                </>
+                                            }
+                                            
+                                        </>
+                                    }
+
+                                    {
+                                        areoi_lightspeed_vars.transition &&
+                                        <areoi.components.PanelRow className={ 'areoi-panel-row areoi-panel-row-no-border' }>
+                                            <areoi.components.ToggleControl 
+                                                label={ 'Exclude transition' }
+                                                help="If checked this block will not implement transitions."
+                                                checked={ attributes.exclude_transition }
+                                                onChange={ ( value ) => onChange( 'exclude_transition', value ) }
+                                            />
+                                        </areoi.components.PanelRow>
+                                    }
+
+                                    {
+                                        areoi_lightspeed_vars.parallax &&
+                                        <areoi.components.PanelRow className={ 'areoi-panel-row areoi-panel-row-no-border' }>
+                                            <areoi.components.ToggleControl 
+                                                label={ 'Exclude parallax' }
+                                                help="If checked this block will not implement parallax."
+                                                checked={ attributes.exclude_parallax }
+                                                onChange={ ( value ) => onChange( 'exclude_parallax', value ) }
+                                            />
+                                        </areoi.components.PanelRow>
+                                    }
+                                    
+                                </areoi.components.PanelBody>
+                            }
+                            
                             { areoi.Utilities( areoi, attributes, onChange ) }
 
                             { areoi.Background( areoi, attributes, onChange ) }

@@ -61,24 +61,16 @@ class AREOI_Styles
     			'includes' 		=> array()
     		),
     	);
+
     	areoi_enqueue_js( $js_enqueues );
 
 		wp_localize_script( 'areoi-blocks', 'areoi_vars', array( 
-			'plugin_url' => AREOI__PLUGIN_URI, 
-			'hide_buttons' => get_option( 'areoi-dashboard-global-hide-buttons-block', 0 ),
-			'hide_columns' => get_option( 'areoi-dashboard-global-hide-columns-block', 0 ),
-			'text_domain' => AREOI__TEXT_DOMAIN,
-			'colors' 		=> array(
-				array( 'name' => 'primary', 'color' => areoi_get_option_color( AREOI__PREPEND . '-customize-theme-colors-primary', '#0d6efd' ) ),
-				array( 'name' => 'secondary', 'color' => areoi_get_option_color( AREOI__PREPEND . '-customize-theme-colors-secondary', '#6c757d' ) ),
-				array( 'name' => 'success', 'color' => areoi_get_option_color( AREOI__PREPEND . '-customize-theme-colors-success', '#198754' ) ),
-				array( 'name' => 'info', 'color' => areoi_get_option_color( AREOI__PREPEND . '-customize-theme-colors-info', '#0dcaf0' ) ),
-				array( 'name' => 'warning', 'color' => areoi_get_option_color( AREOI__PREPEND . '-customize-theme-colors-warning', '#ffc107' ) ),
-				array( 'name' => 'danger', 'color' => areoi_get_option_color( AREOI__PREPEND . '-customize-theme-colors-danger', '#dc3545' ) ),
-				array( 'name' => 'light', 'color' => areoi_get_option_color( AREOI__PREPEND . '-customize-theme-colors-light', '#f8f9fa' ) ),
-				array( 'name' => 'dark', 'color' => areoi_get_option_color( AREOI__PREPEND . '-customize-theme-colors-dark', '#212529' ) ),
-				array( 'name' => 'white', 'color' => '#fff' ),
-			),
+			'plugin_url' 	=> AREOI__PLUGIN_URI, 
+			'hide_buttons' 	=> get_option( 'areoi-dashboard-global-hide-buttons-block', 0 ),
+			'hide_columns' 	=> get_option( 'areoi-dashboard-global-hide-columns-block', 0 ),
+			'text_domain' 	=> AREOI__TEXT_DOMAIN,
+			'colors' 		=> areoi_get_option_colors(),
+			'menus' 		=> self::get_formatted_menus(),
 		) );
 
 		wp_set_script_translations( 'areoi-blocks', AREOI__TEXT_DOMAIN );
@@ -92,6 +84,12 @@ class AREOI_Styles
 	    	);
 	    	areoi_enqueue_css( $css_enqueues );
 		}
+		if ( get_option( 'areoi-dashboard-global-bootstrap-icon-css', 1 ) ) {
+			$css_enqueues = array(
+	    		'areoi-bootstrap-icons' 	=> 'src/bootstrap-icons-1.8.1/bootstrap-icons.min.css',
+	    	);
+	    	areoi_enqueue_css( $css_enqueues );
+		}
 		$css_enqueues = array(
     		'areoi-style-index' => 'build/style-index.css',
     	);
@@ -102,14 +100,15 @@ class AREOI_Styles
 			$js_enqueues = array(
 	    		'areoi-bootstrap' 	=> array(
 	    			'path' 			=> 'assets/js/bootstrap.min.js',
-	    			'includes' 		=> array()
-	    		),
-	    		'areoi-bootstrap-extra' => array(
-	    			'path' 			=> 'assets/js/bootstrap-extra.js',
-	    			'includes' 		=> array( 'areoi-bootstrap' )
+	    			'includes' 		=> array('jquery')
 	    		),
 	    	);
 	    	areoi_enqueue_js( $js_enqueues );
+
+	    	$scripts = '';
+	    	ob_start(); include( AREOI__PLUGIN_DIR . 'assets/js/bootstrap-extra.js' ); $scripts .= ob_get_clean();
+
+	    	wp_add_inline_script( 'areoi-bootstrap', areoi_minify_js( $scripts ) );
 		}
 
 		$post = get_post(); 
@@ -182,7 +181,12 @@ class AREOI_Styles
 				}
 			}
 		}
-		$blocks = array_merge( $standard_blocks, $reuseable_blocks );
+
+		global $_wp_current_template_content;
+		$template_blocks = array();
+		if ( $_wp_current_template_content ) $template_blocks = parse_blocks( $_wp_current_template_content );
+		
+		$blocks = array_merge( $standard_blocks, $reuseable_blocks, $template_blocks );
 		
 		foreach ( $devices as $device_key => $device ) {
 
@@ -199,7 +203,7 @@ class AREOI_Styles
 			$styles .= $new_styles;
 		}
 
-		wp_add_inline_style( 'areoi-style-index', $styles );
+		wp_add_inline_style( 'areoi-style-index', areoi_minify_css( $styles ) );
 	}
 
 	public static function add_block_style( $blocks, $device_key )
@@ -209,10 +213,6 @@ class AREOI_Styles
 			foreach ( $blocks as $block_key => $block ) {
 
 				$attributes = $block['attrs'];
-				
-				if ( empty( $attributes['block_id'] ) ) {
-					continue;
-				}
 				
 				$inner_styles = ( !empty( $attributes['height_dimension' . $device_key] ) ? 'height: ' . $attributes['height_dimension' . $device_key] . (!empty( !empty( $attributes['height_unit' . $device_key] ) ) ? $attributes['height_unit' . $device_key] : 'px') . ';' : '' );
 			    $inner_styles .= ( !empty( $attributes['padding_top' . $device_key] ) ? 'padding-top: ' . $attributes['padding_top' . $device_key] . 'px;' : '' );
@@ -224,7 +224,7 @@ class AREOI_Styles
 			    $inner_styles .= ( !empty( $attributes['margin_bottom' . $device_key] ) ? 'margin-bottom: ' . $attributes['margin_bottom' . $device_key] . 'px;' : '' );
 			    $inner_styles .= ( !empty( $attributes['margin_left' . $device_key] ) ? 'margin-left: ' . $attributes['margin_left' . $device_key] . 'px;' : '' );
 				
-				if ( !empty( $inner_styles ) ) {
+				if ( !empty( $inner_styles ) && !empty( $attributes['block_id'] ) ) {
 					$styles .= '.block-' . $attributes['block_id'] . ' {';
 					$styles .= $inner_styles;			
 				    $styles .= '}';
@@ -235,6 +235,28 @@ class AREOI_Styles
 			    }
 			}
 		}
+
 		return $styles;
+	}
+	public static function get_formatted_menus()
+	{
+		$menus = array(
+			array(
+				'label' => 'Default',
+				'value' => ''
+			)
+		);
+		$all_menus = get_terms( 'nav_menu' );
+
+		if ( !empty( $all_menus ) ) {
+			foreach ( $all_menus as $menu_key => $menu ) {
+				$menus[] = array(
+					'label' => $menu->name,
+					'value' => $menu->term_id
+				);
+			}
+		}
+
+		return $menus;
 	}
 }

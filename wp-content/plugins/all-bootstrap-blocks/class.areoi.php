@@ -12,7 +12,5 @@ class AREOI
 	private static function init_hooks() 
 	{
 		self::$initiated = true;
-
-		
 	}
 }

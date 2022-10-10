@@ -1,6 +1,7 @@
 <?php
 function areoi_render_block_banner_item( $attributes, $content ) 
-{
+{	
+	$allow_pattern = true;
 	
 	$parent 	= areoi_get_parent_block( $attributes['parent_id'] );
 	$layout 	= !empty( $parent['attrs']['layout'] ) ? $parent['attrs']['layout'] : 'grid';

@@ -1,6 +1,8 @@
 <?php
 function areoi_render_block_post_grid( $attributes, $content ) 
 {
+	$allow_pattern = true;
+	
 	$post_type 		= !empty( $attributes['post_type'] ) ? $attributes['post_type'] : 'post';
 	$display_posts 	= !empty( $attributes['display_posts'] ) ? $attributes['display_posts'] : 'selected';
 	$posts_per_page = !empty( $attributes['posts_per_page'] ) ? $attributes['posts_per_page'] : '8';
@@ -43,7 +45,7 @@ function areoi_render_block_post_grid( $attributes, $content )
 			( empty( $attributes['hide_xxl'] ) && !empty( $attributes['horizontal_align_xxl'] ) ? $attributes['horizontal_align_xxl'] : '' ),
 
 			( !empty( $attributes['align'] ) ? 'align' . $attributes['align'] : '' ),
-			( !empty( $attributes['className'] ) ? $attributes['className'] : '' )
+			( !empty( $attributes['className'] ) ? $attributes['className'] : '' ),
 		) ) 
 		. ' ' . 
 		areoi_get_display_class_str( $attributes, 'block' ) 
@@ -135,6 +137,7 @@ function areoi_render_block_post_grid( $attributes, $content )
 					$attributes['background_display_overlay'] 	= $attributes['item_display_overlay'];
 					$attributes['background_overlay'] 			= $attributes['item_overlay'];
 
+					$allow_pattern = false;
 					$media .= include( AREOI__PLUGIN_DIR . '/blocks/_partials/background.php' );
 				}
 			}
@@ -184,7 +187,7 @@ function areoi_render_block_post_grid( $attributes, $content )
 					$output .= '
 						<div class="' . $class . ' p-0">
 
-							<div class="d-flex flex-column h-100 overflow-hidden position-relative">
+							<div class="d-flex flex-column h-100 overflow-hidden position-relative areoi-has-url">
 
 								' . $media . '
 
@@ -205,7 +208,7 @@ function areoi_render_block_post_grid( $attributes, $content )
 					$output .= '
 						<div class="' . $class . '">
 
-							<div class="d-flex flex-column h-100 overflow-hidden position-relative">
+							<div class="d-flex flex-column h-100 overflow-hidden position-relative areoi-has-url">
 								
 								' . $media . '
 
@@ -227,7 +230,7 @@ function areoi_render_block_post_grid( $attributes, $content )
 					$output .= '
 						<div class="' . $class . '">
 
-							<div class="card h-100 overflow-hidden position-relative">
+							<div class="card h-100 overflow-hidden position-relative areoi-has-url">
 
 								' . $media . '
 

@@ -57,6 +57,7 @@ class AREOI_Settings
 			            'type' 				=> 'string', 
 			            'sanitize_callback' => 'sanitize_text_field',
 			        );
+
 			    	register_setting( $child['slug'], $option['name'], $args );
 				}
 			}
@@ -129,7 +130,7 @@ class AREOI_Settings
 							<h2><?php echo esc_attr( $active_page['name'] ) ?></h2>
 						</div><!-- .areoi-header -->
 
-						<form method="post" action="options.php" class="areoi-form"> 
+						<form method="post" action="options.php" enctype="multipart/form-data" class="areoi-form"> 
 							<div class="areoi-body">
 
 								<?php settings_fields( esc_attr( $active_page['slug'] ) ); ?>
@@ -245,7 +246,7 @@ class AREOI_Settings
 		self::custom_colors();
 
 		$rows = array(
-			'name'		=> 'Bootstrap',
+			'name'		=> areoi_is_lightspeed() ? 'Lightspeed' : 'Bootstrap',
 			'slug' 		=> AREOI__PREPEND . '-dashboard',
 			'icon'		=> 'data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4NCjwhLS0gR2VuZXJhdG9yOiBBZG9iZSBJbGx1c3RyYXRvciAyNS40LjAsIFNWRyBFeHBvcnQgUGx1Zy1JbiAuIFNWRyBWZXJzaW9uOiA2LjAwIEJ1aWxkIDApICAtLT4NCjxzdmcgdmVyc2lvbj0iMS4xIiBpZD0iTGF5ZXJfMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgeD0iMHB4IiB5PSIwcHgiDQoJIHZpZXdCb3g9IjAgMCAxMDAgMTAwIiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCAxMDAgMTAwOyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+DQo8c3R5bGUgdHlwZT0idGV4dC9jc3MiPg0KCS5zdDB7ZmlsbDojQTdBQUFEO30NCjwvc3R5bGU+DQo8Zz4NCgk8cGF0aCBjbGFzcz0ic3QwIiBkPSJNNDUuOCwwLjlMMi42LDk5LjFsMCwwYzEzLjksMCwyNi41LTguNCwzMi4xLTIwLjlMNjguOCwwLjlINDUuOHoiLz4NCgk8cGF0aCBjbGFzcz0ic3QwIiBkPSJNNzMuNyw3Ni44YzkuMSwwLDE3LjQsMy41LDIzLjcsOS44TDczLjcsMzIuOUw1MCw4Ni42QzU2LjMsODEsNjQuNiw3Ni44LDczLjcsNzYuOHoiLz4NCjwvZz4NCjwvc3ZnPg0K',
 			'priority'	=> 60,
@@ -295,6 +296,16 @@ class AREOI_Settings
 				'priority'	=> 60,
 				'sections'	=> self::load_settings( 'components' )
 			);
+
+			if ( areoi_is_lightspeed() ) {
+				$rows['children'][AREOI__PREPEND . '-lightspeed'] = array(
+					'name'		=> 'Lightspeed',
+					'slug' 		=> AREOI__PREPEND . '-lightspeed',
+					'icon'		=> '',
+					'priority'	=> 60,
+					'sections'	=> self::load_settings( 'lightspeed' )
+				);
+			}
 		}
 
 		return $rows;

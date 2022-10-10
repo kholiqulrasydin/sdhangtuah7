@@ -16,7 +16,7 @@ class AREOI_Activate
 		$_settings = new AREOI_Settings();
 		$_settings->compile_scss();
 
-		update_option( 'areoi-dashboard-global-bootstrap-css', 1 );
-		update_option( 'areoi-dashboard-global-bootstrap-js', 1 );
+		if ( get_option('areoi-dashboard-global-bootstrap-css', 'fail') == 'fail' ) update_option( 'areoi-dashboard-global-bootstrap-css', 1 );
+		if ( get_option('areoi-dashboard-global-bootstrap-js', 'fail') == 'fail' ) update_option( 'areoi-dashboard-global-bootstrap-js', 1 );
 	}
 }

@@ -108,6 +108,21 @@ class Jwt_Auth_Public
             'callback' => array($this, 'adminVerify'),
         ));
 
+        register_rest_route($this->namespace, 'insertTesti', array(
+            'methods' => 'POST',
+            'callback' => array($this, 'insertTestimoni'),
+        ));
+
+        register_rest_route($this->namespace, 'getTestiAlumni', array(
+            'methods' => 'GET',
+            'callback' => array($this, 'getTestimoniAlumni'),
+        ));
+
+        register_rest_route($this->namespace, 'getTestiOrtu', array(
+            'methods' => 'GET',
+            'callback' => array($this, 'getTestimoniOrtu'),
+        ));
+
         // $routes = new PublicRoutes();
         // $routes->registerAllRoutes();
 
@@ -136,11 +151,40 @@ class Jwt_Auth_Public
         }
     }
 
+    public function insertTestimoni($request)
+    {
+        $response['nama'] = $request['nama'];
+        $response['testi'] = $request['testi'];
+        $response['type'] = $request['type'];
+
+        $db = new wpdb(DB_USER, DB_PASSWORD, DB_NAME, DB_HOST);
+        if ($response['type'] == 1) {
+            $data = $db->get_results("INSERT INTO sdhangtuah7_testimonials VALUE('', '$response[nama]', '$response[testi]', 'ortu')");
+        } else {
+            $data = $db->get_results("INSERT INTO sdhangtuah7_testimonials VALUE('', '$response[nama]', '$response[testi]', 'alumni')");
+        }
+        return new WP_REST_Response($data, 200);
+    }
+
+    public function getTestimoniAlumni()
+    {
+        $db = new wpdb(DB_USER, DB_PASSWORD, DB_NAME, DB_HOST);
+        $data = $db->get_results('select * from sdhangtuah7_testimonials WHERE testimonial_type = '.'"alumni"'.'ORDER BY id DESC LIMIT 4');
+        return new WP_REST_Response(array('values' => $data, 'status_code' => 200));
+    }
+
+    public function getTestimoniOrtu()
+    {
+        $db = new wpdb(DB_USER, DB_PASSWORD, DB_NAME, DB_HOST);
+        $data = $db->get_results('select * from sdhangtuah7_testimonials WHERE testimonial_type = '.'"ortu"'.'ORDER BY id DESC LIMIT 4');
+        return new WP_REST_Response(array('values' => $data, 'status_code' => 200));
+    }
+
     public function get_posts()
     {
         $db = new wpdb(DB_USER, DB_PASSWORD, DB_NAME, DB_HOST);
-        $data = $db->get_results('select * from sdhangtuah7_posts');
-        return new WP_REST_Response($data, 200);
+        $data = $db->get_results('select * from sdhangtuah7_posts WHERE post_type = '.'"post"'.'AND post_status = '.'"publish"');
+        return new WP_REST_Response(array('values' => $data, 'status_code' => 200));
     }
 
     public function adminVerify() {

@@ -1,11 +1,11 @@
 var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'));
 var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
-	return new bootstrap.Popover(popoverTriggerEl)
+	return new bootstrap.Popover(popoverTriggerEl);
 });
 
 var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
 var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
-	return new bootstrap.Tooltip(tooltipTriggerEl)
+	return new bootstrap.Tooltip(tooltipTriggerEl);
 });
 
 var modals = document.getElementsByClassName("modal");
@@ -110,3 +110,36 @@ if ( toast_links.length ) {
 		}, false );
 	});
 }
+
+jQuery(document).ready(function($){
+
+	$( '.areoi-tabs' ).each( function() {
+
+		var active = $( this ).find( '.nav a.active:first-of-type' );
+
+		$( this ).find( '.nav a.active:not(:first-of-type)' ).removeClass( 'active' );
+
+		$( this ).find( '> div' ).addClass( 'tab-pane d-none' );
+
+		var active_tab = $( this ).find( active.attr( 'href' ) );
+
+		if ( active_tab ) {
+			active_tab.removeClass( 'd-none' );
+		}
+	});
+
+	$( document ).on( 'click', '.areoi-tabs .nav a', function( e ) {
+		e.preventDefault();
+		var container = $( this ).parents( '.areoi-tabs' );
+		var active_tab = container.find( $( this ).attr( 'href' ) );
+		
+		container.find( '.nav a' ).removeClass( 'active' );
+		$( this ).addClass( 'active' );
+
+		if ( active_tab ) {
+			container.find( '> div' ).addClass( 'd-none' );
+			active_tab.removeClass( 'd-none' );
+		}
+	} );
+
+});

@@ -1,14 +1,16 @@
 <?php
 function areoi_render_block_content_with_media( $attributes, $content ) 
 {
+	$allow_pattern = true;
+	
 	$class 			= 	trim( 
 		areoi_get_class_name_str( array( 
 			'areoi-content-with-media',
 			( !empty( $attributes['align'] ) ? 'align' . $attributes['align'] : '' ),
-			( !empty( $attributes['className'] ) ? $attributes['className'] : '' )
+			( !empty( $attributes['className'] ) ? $attributes['className'] : '' ),
 		) ) 
 		. ' ' . 
-		areoi_get_display_class_str( $attributes, 'block' ) 
+		areoi_get_display_class_str( $attributes, 'block' )
 	);
 
 	$alignment = ( !empty( $attributes['alignment'] ) ? $attributes['alignment'] : 'start' );

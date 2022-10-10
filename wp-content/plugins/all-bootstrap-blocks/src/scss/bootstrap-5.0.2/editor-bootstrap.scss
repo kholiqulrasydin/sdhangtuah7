@@ -12,7 +12,8 @@
 // Layout & components
 @import "root";
 
-.block-editor-block-list__layout.is-root-container {
+.block-editor-block-list__layout.is-root-container,
+.editor-styles-wrapper .block-editor-block-list__layout.is-root-container {
     @import "reboot";
     @import "type";
     @import "images";
@@ -69,24 +70,24 @@
         }
 
         /* Vertical Alignment of rows */
-        .row.align-items#{$infix}-start,
-        .col.align-items#{$infix}-start {
+        .row.align-items#{$infix}-start:not(.areoi-lightspeed-block .row),
+        .col.align-items#{$infix}-start:not(.areoi-lightspeed-block .col) {
             display: block !important;
 
             & > .block-editor-inner-blocks > .block-editor-block-list__layout {
                 align-items: flex-start !important;
             }
         }
-        .row.align-items#{$infix}-center,
-        .col.align-items#{$infix}-center {
+        .row.align-items#{$infix}-center:not(.areoi-lightspeed-block .row),
+        .col.align-items#{$infix}-center:not(.areoi-lightspeed-block .col) {
             display: block !important;
 
             & > .block-editor-inner-blocks > .block-editor-block-list__layout {
                 align-items: center !important;
             }
         }
-        .row.align-items#{$infix}-end,
-        .col.align-items#{$infix}-end {
+        .row.align-items#{$infix}-end:not(.areoi-lightspeed-block .row),
+        .col.align-items#{$infix}-end:not(.areoi-lightspeed-block .col) {
             display: block !important;
 
             & > .block-editor-inner-blocks > .block-editor-block-list__layout {
@@ -95,42 +96,42 @@
         }
 
         /* Horizontal Alignment of rows */
-        .row.justify-content#{$infix}-start:not( .background .row ) {
+        .row.justify-content#{$infix}-start:not( .background .row, .areoi-lightspeed-block .row ) {
             display: block !important;
 
             & > .block-editor-inner-blocks > .block-editor-block-list__layout {
                 justify-content: flex-start !important;
             }
         }
-        .row.justify-content#{$infix}-center:not( .background .row ) {
+        .row.justify-content#{$infix}-center:not( .background .row, .areoi-lightspeed-block .row ) {
             display: block !important;
 
             & > .block-editor-inner-blocks > .block-editor-block-list__layout {
                 justify-content: center !important;
             }
         }
-        .row.justify-content#{$infix}-end:not( .background .row ) {
+        .row.justify-content#{$infix}-end:not( .background .row, .areoi-lightspeed-block .row ) {
             display: block !important;
 
             & > .block-editor-inner-blocks > .block-editor-block-list__layout {
                 justify-content: flex-end !important;
             }
         }
-        .row.justify-content#{$infix}-around {
+        .row.justify-content#{$infix}-around:not(.areoi-lightspeed-block .row) {
             display: block !important;
 
             & > .block-editor-inner-blocks > .block-editor-block-list__layout {
                 justify-content: space-around !important;
             }
         }
-        .row.justify-content#{$infix}-between {
+        .row.justify-content#{$infix}-between:not(.areoi-lightspeed-block .row) {
             display: block !important;
 
             & > .block-editor-inner-blocks > .block-editor-block-list__layout {
                 justify-content: space-between !important;
             }
         }
-        .row.justify-content#{$infix}-evenly {
+        .row.justify-content#{$infix}-evenly:not(.areoi-lightspeed-block .row) {
             display: block !important;
 
             & > .block-editor-inner-blocks > .block-editor-block-list__layout {

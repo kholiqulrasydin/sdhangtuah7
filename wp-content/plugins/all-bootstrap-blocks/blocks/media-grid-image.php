@@ -66,14 +66,14 @@ function areoi_render_block_media_grid_image( $attributes, $content )
 		$output .= '<figure class="wp-block-areoi-media-grid-image areoi-content-grid-item ' . $padding . '">';
 
 			if ( !empty( $link_url ) ) {
-				$output .= '<a href="' . $link_url . '"' . $link_target_str . ' class="areoi-media">';
+				$output .= '<a href="' . $link_url . '"' . $link_target_str . ' class="areoi-media areoi-has-url">';
 			} else {
 				$output .= '<div class="areoi-media">';
 			}
 
 				$output .= '<div class="areoi-media-container ' . $fit . ' ' . $align . '">';
 					$output .= '<img src="' . $image_url . '" alt="' . $image_alt . '" width="' . $image_width . '" height="' . $image_height . '"  style="' . ( $height ? 'max-height: ' . $height . 'px;' : '') . ( $width ? 'max-width: ' . $width . 'px;' : '') . '" />';
-				$output .= '</div';
+				$output .= '</div>';
 
 			if ( !empty( $link_url ) ) {
 				$output .= '</a>';

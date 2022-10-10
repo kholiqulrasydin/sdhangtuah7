@@ -1,19 +1,14 @@
-<?php  
-$image_id 	= $value;
-$image 		= ( $image_id ? wp_get_attachment_image_src( $image_id, 'full' ) : null );
-?>
-
+<?php //echo '<pre>'; print_r( $value ); echo '</pre>'; die; ?>
 <div class="areoi-variable-row <?php echo esc_attr( $is_variable ? 'areoi-is-variable' : '' ) ?>">
 	<div class="areoi-field areoi-field-visual">
-		<div class="areoi-upl-container <?php echo esc_attr( $image ? 'with-image' : '' ) ?>">
+		<div class="areoi-upl-container <?php echo esc_attr( $value ? 'with-image' : '' ) ?>">
 			<a href="#" class="areoi-upl areoi-image-opaque">
-				<img src="<?php echo esc_url( $image[0] ) ?>" />
+				<img src="<?php echo esc_url( $value ) ?>" style="width: 100%; height: auto;" />
 				<span class="button">Upload image</span>
 			</a>
 			<a href="#" class="areoi-rmv">Remove image</a>
 		</div><!-- .areoi-upl-container -->
 		<div></div>
-		<button type="button" class="areoi-toggle-field">Use SASS variable</button>
 	</div>
 
 	<div class="areoi-field areoi-field-variable">
